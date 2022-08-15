@@ -4,7 +4,9 @@
   "description": "test project for work",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "cross-env NODE_ENV=production node ./server.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon ./server.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,8 @@
     "express": "^4.18.1",
     "gravatar": "^1.8.2",
     "mongodb": "^4.8.1",
-    "mongoose": "^6.5.2"
+    "mongoose": "^6.5.2",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "jest": "^28.1.3",

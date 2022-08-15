@@ -1,14 +1,15 @@
-const http = require('http');
+const express = require('express')
+const logger = require('morgan')
+const cors = require('cors');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const app = express();
+const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
+app.use(logger(formatsLogger));
+app.use(cors());
+app.use(express.json())
+app.use((req, res) => {
+  res.status(404).json({ message: 'Error! Wrong direct' })
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+module.exports = app;
