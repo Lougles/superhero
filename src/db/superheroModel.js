@@ -37,4 +37,6 @@ const superheroSchema = new mongoose.Schema({
 const Hero = mongoose.model('Hero', superheroSchema);
 
 
-module.exports = Hero;
+module.exports = {
+  Hero
+};
