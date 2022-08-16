@@ -14,7 +14,8 @@ const getHeroController = async(req, res) => {
 }
 
 const getHeroByIdController = async(req, res) => {
-  const result = await getHeroByIdService();
+  const {id} = req.params;
+  const result = await getHeroByIdService(id);
   res.json({
     status: 'success',
     data: result,

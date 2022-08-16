@@ -8,8 +8,12 @@ const getHeroService = async() => {
   return result;
 }
 
-const getHeroByIdService = async() => {
-
+const getHeroByIdService = async(id) => {
+  const result = await Hero.findOne({_id: id})
+  if(!result) {
+    throw new WrongIdError(`Fail, id ${id} is not found`)
+  }
+  return result;
 }
 
 const addHeroService = async(nickname, real_name, origin_description, superpowers, catch_phrase) => {
