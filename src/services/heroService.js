@@ -1,3 +1,4 @@
+const res = require('express/lib/response');
 const {Hero} = require('../db/superheroModel')
 const {WrongIdError} = require('../helpers/errors')
 
@@ -26,7 +27,7 @@ const getHeroByIdService = async(id) => {
 }
 
 const addHeroService = async(nickname, real_name, origin_description, superpowers, catch_phrase) => {
-  const result = new Hero({nickname, real_name, origin_description, superpowers, catch_phrase});
+  const result = new Hero({nickname, real_name, origin_description, superpowers, catch_phrase})
   await result.save();
   return result;
 }

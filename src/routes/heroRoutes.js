@@ -8,14 +8,17 @@ const {
   addHeroController,
   deleteHeroController,
   updateHeroController
-} = require('../controllers/heroController')
-
+} = require('../controllers/heroController');
+const {
+  addHeroValidation,
+  updateHeroValidation
+} = require('../middlewares/validation')
 
 
 router.get('/', asyncWrapper(getHeroController));
 router.get('/:id', asyncWrapper(getHeroByIdController));
-router.post('/', asyncWrapper(addHeroController));
+router.post('/', addHeroValidation, asyncWrapper(addHeroController));
 router.delete('/:id', asyncWrapper(deleteHeroController));
-router.patch('/:id', asyncWrapper(updateHeroController));
+router.patch('/:id', updateHeroValidation, asyncWrapper(updateHeroController));
 
 module.exports = router;

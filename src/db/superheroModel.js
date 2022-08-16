@@ -15,7 +15,7 @@ const superheroSchema = new mongoose.Schema({
   },
   origin_description: {
     type: String,
-    default: `this is ${this.nickname} superhero. He's original name is ${this.real_name}`
+    default: `this is a cool superhero`
   },
   superpowers: {
     type: String,
