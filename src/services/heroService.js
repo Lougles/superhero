@@ -18,6 +18,7 @@ const getHeroService = async(page) => {
 
 const getHeroByIdService = async(id) => {
   const result = await Hero.findOne({_id: id})
+  .select({_id: 0, __v: 0, createdAt: 0});
   if(!result) {
     throw new WrongIdError(`Fail, id ${id} is not found`)
   }
@@ -38,9 +39,19 @@ const deleteHeroService = async(id) => {
   return result;
 }
 
+const updateHeroService = async(id, {nickname, real_name, origin_description, superpowers, catch_phrase}) => {
+  const result = await Hero.findOneAndUpdate({_id: id}, {$set: {nickname, real_name, origin_description, superpowers, catch_phrase}},{returnDocument: 'after'})
+  .select({_id: 0, __v: 0, createdAt: 0});
+  if(!result) {
+    throw new WrongIdError(`Fail, id ${id} is not found`)
+  }
+  return result;
+}
+
 module.exports = {
   getHeroService,
   getHeroByIdService,
   addHeroService,
-  deleteHeroService
+  deleteHeroService,
+  updateHeroService
 }
