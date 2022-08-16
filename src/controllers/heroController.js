@@ -7,6 +7,7 @@ const {
 
 
 const getHeroController = async() => {
+  
   const result = await getHeroService();
   return result;
 }
