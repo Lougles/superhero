@@ -23,7 +23,7 @@ const superheroSchema = new mongoose.Schema({
   catch_phrase: {
     type: String,
   },
-  Image: {
+  image: {
     type: String,
     default: gravatar.url(this.nickname),
   },
@@ -37,4 +37,6 @@ const superheroSchema = new mongoose.Schema({
 const Hero = mongoose.model('Hero', superheroSchema);
 
 
-module.exports = Hero;
+module.exports = {
+  Hero
+};
