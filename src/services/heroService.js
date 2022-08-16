@@ -3,8 +3,16 @@ const {WrongIdError} = require('../helpers/errors')
 
 
 
-const getHeroService = async() => {
-  const result = await Hero.find({});
+const getHeroService = async(page) => {
+  if(!page){
+    page = 1;
+  }
+  const limit = 5;
+  const skip = parseInt(page - 1) * parseInt(limit);
+  const result = await Hero.find({})
+  .select({nickname: 1, image: 1, _id: 0})
+  .skip(skip)
+  .limit(limit);
   return result;
 }
 
@@ -22,8 +30,12 @@ const addHeroService = async(nickname, real_name, origin_description, superpower
   return result;
 }
 
-const deleteHeroService = async() => {
-
+const deleteHeroService = async(id) => {
+  const result = await Hero.findOneAndRemove({_id: id});
+  if(!result){
+    throw new WrongIdError(`Fail, id ${id} is not found`)
+  }
+  return result;
 }
 
 module.exports = {

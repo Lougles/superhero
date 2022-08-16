@@ -23,7 +23,7 @@ const superheroSchema = new mongoose.Schema({
   catch_phrase: {
     type: String,
   },
-  Image: {
+  image: {
     type: String,
     default: gravatar.url(this.nickname),
   },

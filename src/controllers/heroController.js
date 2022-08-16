@@ -6,7 +6,8 @@ const {
 } = require('../services/heroService');
 
 const getHeroController = async(req, res) => {
-  const result = await getHeroService();
+  const {page} = req.query;
+  const result = await getHeroService(page);
   res.json({
     status: 'success',
     data: result,
@@ -32,13 +33,13 @@ const addHeroController = async(req, res) => {
 }
 
 const deleteHeroController = async(req, res) => {
-  const result = await deleteHeroService();
+  const {id} = req.params;
+  const result = await deleteHeroService(id);
   res.json({
-    status: 'success',
+    status: 'deleted',
     data: result,
   })
 }
-
 
 module.exports = {
   getHeroController,
