@@ -1,21 +1,21 @@
-const {validationError} = require('../helpers/errors');
 const Joi = require('joi');
+const {validationError} = require('../helpers/errors');
 
 
 const addHeroSchema = Joi.object({
-  nickname: Joi.string().alphanum().min(3).max(15).required(),
-  real_name: Joi.string().alphanum().min(3).max(15).required(),
-  origin_description: Joi.string().min(10).max(300),
-  superpowers: Joi.string().min(5).max(100),
-  catch_phrase: Joi.string().min(5).max(100),
+  nickname: Joi.string().min(3).max(15).required(),
+  real_name: Joi.string().min(3).max(15).required(),
+  origin_description: Joi.string(),
+  superpowers: Joi.string(),
+  catch_phrase: Joi.string(),
 });
 
 const updateHeroSchema = Joi.object({
-  nickname: Joi.string().alphanum().min(3).max(15),
-  real_name: Joi.string().alphanum().min(3).max(15),
-  origin_description: Joi.string().min(10).max(300),
-  superpowers: Joi.string().min(5).max(100),
-  catch_phrase: Joi.string().min(5).max(100),
+  nickname: Joi.string().min(3).max(15),
+  real_name: Joi.string().min(3).max(15),
+  origin_description: Joi.string(),
+  superpowers: Joi.string(),
+  catch_phrase: Joi.string(),
 });
 
 const addHeroValidation = (req, res, next) => {

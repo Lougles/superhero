@@ -15,7 +15,6 @@ const {
 } = require('../middlewares/validation')
 
 
-
 router.get('/', asyncWrapper(getHeroController));
 router.get('/:id', asyncWrapper(getHeroByIdController));
 router.post('/', addHeroValidation, asyncWrapper(addHeroController));
