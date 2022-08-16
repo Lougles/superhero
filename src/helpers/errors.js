@@ -19,7 +19,7 @@ class WrongIdError extends SuperHeroError {
   }
 }
 
-class UpdateHeroError extends Nodejs26Error {
+class UpdateHeroError extends SuperHeroError {
   constructor(message){
     super(message);
     this.status = 400;

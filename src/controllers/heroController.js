@@ -5,26 +5,37 @@ const {
   deleteHeroService
 } = require('../services/heroService');
 
-
-const getHeroController = async() => {
-  
+const getHeroController = async(req, res) => {
   const result = await getHeroService();
-  return result;
+  res.json({
+    status: 'success',
+    data: result,
+  })
 }
 
-const getHeroByIdController = async() => {
+const getHeroByIdController = async(req, res) => {
   const result = await getHeroByIdService();
-  return result;
+  res.json({
+    status: 'success',
+    data: result,
+  })
 }
 
-const addHeroController = async() => {
-  const result = await addHeroService();
-  return result;
+const addHeroController = async(req, res) => {
+  const {nickname, real_name, origin_description, superpowers, catch_phrase} = req.body;
+  const result = await addHeroService(nickname, real_name, origin_description, superpowers, catch_phrase);
+  res.json({
+    status: 'success',
+    data: result,
+  })
 }
 
-const deleteHeroController = async() => {
+const deleteHeroController = async(req, res) => {
   const result = await deleteHeroService();
-  return result;
+  res.json({
+    status: 'success',
+    data: result,
+  })
 }
 
 
