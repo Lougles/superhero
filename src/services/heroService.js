@@ -51,6 +51,11 @@ const updateHeroService = async(id, {nickname, real_name, origin_description, su
 }
 
 const updateHeroImgService = async(id, img) => {
+  const hero = await Hero.findOne({_id: id});
+  const oldImg = hero.image;
+  if(fse.existsSync(oldImg)){
+    fse.unlink(oldImg);
+  }
   const img_dir = `public/${id}/${img.filename}`;
   jimpImg(img, id);
   const result = await Hero.findOneAndUpdate({_id: id}, {$set: {image: img_dir}}, {returnDocument: 'after'});
