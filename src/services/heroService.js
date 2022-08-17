@@ -1,7 +1,7 @@
 const res = require('express/lib/response');
 const {Hero} = require('../db/superheroModel')
 const {WrongIdError} = require('../helpers/errors')
-
+const dir = './public';
 
 
 const getHeroService = async(page) => {
@@ -49,10 +49,17 @@ const updateHeroService = async(id, {nickname, real_name, origin_description, su
   return result;
 }
 
+const updateHeroImgService = async(id, img) => {
+  const img_dir = `${dir}/${img.filename}`;
+  const result = await Hero.findOneAndUpdate({_id: id}, {$set: {image: img_dir}}, {returnDocument: 'after'});
+  return result;
+}
+
 module.exports = {
   getHeroService,
   getHeroByIdService,
   addHeroService,
   deleteHeroService,
-  updateHeroService
+  updateHeroService,
+  updateHeroImgService
 }
