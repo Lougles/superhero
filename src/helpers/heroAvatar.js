@@ -1,11 +1,9 @@
 const multer = require('multer');
-const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-const temp = path.resolve('./public');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, temp);
+    cb(null, 'temp/');
   },
   filename: function(req, file, cb){
     const [, extansion] = file.originalname.split('.');

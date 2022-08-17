@@ -1,7 +1,6 @@
-const res = require('express/lib/response');
 const {Hero} = require('../db/superheroModel')
-const {WrongIdError} = require('../helpers/errors')
-const dir = './public';
+const {WrongIdError} = require('../helpers/errors');
+const {jimpImg} = require('../helpers/jimpImg');
 
 
 const getHeroService = async(page) => {
@@ -50,7 +49,8 @@ const updateHeroService = async(id, {nickname, real_name, origin_description, su
 }
 
 const updateHeroImgService = async(id, img) => {
-  const img_dir = `${dir}/${img.filename}`;
+  const img_dir = `public/${id}/${img.filename}`;
+  jimpImg(img, id);
   const result = await Hero.findOneAndUpdate({_id: id}, {$set: {image: img_dir}}, {returnDocument: 'after'});
   return result;
 }
