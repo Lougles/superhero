@@ -29,8 +29,6 @@ const getHeroByIdController = async(req, res) => {
 const addHeroController = async(req, res) => {
   const {nickname, real_name, origin_description, superpowers, catch_phrase} = req.body;
   const file = req.file;
-  console.log(req.body);
-  console.log(file);
   const result = await addHeroService(nickname, real_name, origin_description, superpowers, catch_phrase);
   res.json({
     status: 'Added',

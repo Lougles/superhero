@@ -15,6 +15,9 @@ const getHeroService = async(page) => {
   .select({nickname: 1, image: 1, _id: 0})
   .skip(skip)
   .limit(limit);
+  if(!Object.keys(result).length) {
+    return 'there are no heroes here, add them first';
+  }
   return result;
 }
 
@@ -34,7 +37,8 @@ const addHeroService = async(nickname, real_name, origin_description, superpower
 }
 
 const deleteHeroService = async(id) => {
-  const result = await Hero.findOneAndRemove({_id: id});
+  const result = await Hero.findOneAndRemove({_id: id})
+  .select({_id: 0, __v: 0, createdAt: 0});
   if(!result){
     throw new WrongIdError(`Fail, id ${id} is not found`)
   }
@@ -67,7 +71,6 @@ const deleteHeroImgService = async(id) => {
   const img = hero.image;
   fse.unlink(img);
   const result = await Hero.findOneAndUpdate({_id: id}, {$set: {image: ''}}, {returnDocument: 'after'});
-  console.log(result);
   return result;
 }
 
