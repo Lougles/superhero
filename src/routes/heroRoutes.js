@@ -7,12 +7,15 @@ const {
   getHeroByIdController,
   addHeroController,
   deleteHeroController,
-  updateHeroController
+  updateHeroController,
+  updateHeroImgController,
+  deleteHeroImgController
 } = require('../controllers/heroController');
 const {
   addHeroValidation,
   updateHeroValidation
-} = require('../middlewares/validation')
+} = require('../middlewares/validation');
+const {upload} = require('../helpers/heroAvatar')
 
 
 router.get('/', asyncWrapper(getHeroController));
@@ -20,5 +23,7 @@ router.get('/:id', asyncWrapper(getHeroByIdController));
 router.post('/', addHeroValidation, asyncWrapper(addHeroController));
 router.delete('/:id', asyncWrapper(deleteHeroController));
 router.patch('/:id', updateHeroValidation, asyncWrapper(updateHeroController));
+router.patch('/img/:id', upload.single('img'), asyncWrapper(updateHeroImgController));
+router.delete('/img/:id', asyncWrapper(deleteHeroImgController));
 
 module.exports = router;

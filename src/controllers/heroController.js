@@ -3,7 +3,9 @@ const {
   getHeroByIdService,
   addHeroService,
   deleteHeroService,
-  updateHeroService
+  updateHeroService,
+  updateHeroImgService,
+  deleteHeroImgService
 } = require('../services/heroService');
 
 const getHeroController = async(req, res) => {
@@ -26,6 +28,7 @@ const getHeroByIdController = async(req, res) => {
 
 const addHeroController = async(req, res) => {
   const {nickname, real_name, origin_description, superpowers, catch_phrase} = req.body;
+  const file = req.file;
   const result = await addHeroService(nickname, real_name, origin_description, superpowers, catch_phrase);
   res.json({
     status: 'Added',
@@ -52,10 +55,34 @@ const updateHeroController = async(req,res) => {
   })
 }
 
+const updateHeroImgController = async(req,res) => {
+  const {id} = req.params;
+  const img = req.file;
+  const result = await updateHeroImgService(id, img);
+  res.json({
+    status: "Img updated",
+    data: {
+      nickname: result.nickname,
+      img: result.image,
+    },
+  })
+}
+
+const deleteHeroImgController = async(req,res) => {
+  const {id} = req.params;
+  const result = await deleteHeroImgService(id);
+  res.json({
+    status: "Img deleted",
+    data: result,
+  })
+}
+
 module.exports = {
   getHeroController,
   getHeroByIdController,
   addHeroController,
   deleteHeroController,
-  updateHeroController
+  updateHeroController,
+  updateHeroImgController,
+  deleteHeroImgController
 }
