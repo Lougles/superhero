@@ -1,6 +1,8 @@
+const { fstat } = require('fs-extra');
 const {Hero} = require('../db/superheroModel')
 const {WrongIdError} = require('../helpers/errors');
 const {jimpImg} = require('../helpers/jimpImg');
+const fse = require('fs-extra');
 
 
 const getHeroService = async(page) => {
@@ -55,11 +57,21 @@ const updateHeroImgService = async(id, img) => {
   return result;
 }
 
+const deleteHeroImgService = async(id) => {
+  const hero = await Hero.findOne({_id: id});
+  const img = hero.image;
+  fse.unlink(img);
+  const result = await Hero.findOneAndUpdate({_id: id}, {$set: {image: ''}}, {returnDocument: 'after'});
+  console.log(result);
+  return result;
+}
+
 module.exports = {
   getHeroService,
   getHeroByIdService,
   addHeroService,
   deleteHeroService,
   updateHeroService,
-  updateHeroImgService
+  updateHeroImgService,
+  deleteHeroImgService
 }

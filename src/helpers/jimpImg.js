@@ -1,7 +1,5 @@
 const Jimp = require('jimp');
 const fse = require('fs-extra');
-const path = require('path');
-const temp = path.resolve('./temp');
 
 const jimpImg = async (img, id) => {
   const FILE_DIR = `public/${id}/${img.filename}`;

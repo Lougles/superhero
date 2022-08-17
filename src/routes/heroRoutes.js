@@ -8,7 +8,8 @@ const {
   addHeroController,
   deleteHeroController,
   updateHeroController,
-  updateHeroImgController
+  updateHeroImgController,
+  deleteHeroImgController
 } = require('../controllers/heroController');
 const {
   addHeroValidation,
@@ -23,5 +24,6 @@ router.post('/', addHeroValidation, asyncWrapper(addHeroController));
 router.delete('/:id', asyncWrapper(deleteHeroController));
 router.patch('/:id', updateHeroValidation, asyncWrapper(updateHeroController));
 router.patch('/img/:id', upload.single('img'), asyncWrapper(updateHeroImgController));
+router.delete('/img/:id', asyncWrapper(deleteHeroImgController));
 
 module.exports = router;
