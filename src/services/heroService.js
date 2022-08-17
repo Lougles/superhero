@@ -23,7 +23,7 @@ const getHeroService = async(page) => {
 
 const getHeroByIdService = async(id) => {
   const result = await Hero.findOne({_id: id})
-  .select({_id: 0, __v: 0, createdAt: 0});
+  // .select({_id: 0, __v: 0, createdAt: 0});
   if(!result) {
     throw new WrongIdError(`Fail, id ${id} is not found`)
   }
