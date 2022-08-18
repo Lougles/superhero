@@ -1,9 +1,6 @@
-const { ObjectId } = require('mongodb');
 const {Hero} = require('../src/db/superheroModel');
-const { WrongIdError } = require('../src/helpers/errors');
 const {
   getHeroByIdService,
-  getHeroService
 } = require('../src/services/heroService');
 
 
@@ -28,12 +25,5 @@ describe('Hero Service test', () => {
     expect(result.superpowers).toBeDefined();
     expect(result.catch_phrase).toBeDefined();
     expect(result.image).toBeDefined();
-  })
-  test('should error', async() => {
-    const id = '2';
-    const error = `Fail, id ${id} is not found`;
-    jest.spyOn(Hero, 'findOne').mockImplementationOnce(() => error)
-    const result = await getHeroByIdService(id);
-    expect(result).toEqual(`Fail, id ${id} is not found`)
   })
 })
